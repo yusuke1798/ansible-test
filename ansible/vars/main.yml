@@ -1,0 +1,24 @@
+---
+- name: test play
+  sudo: yes
+  hosts: web
+  vars:
+    src_dir: /root/ansible/sample_dir/
+    dest_dir: /tmp/sample
+  tasks:
+    - name: copy the file
+      copy: src=/root/ansible/sample_dir/sample.tar.gz dest=/tmp/
+    - name: copy the directory
+      copy: src={{src_dir}} dest={{dest_dir}}
+    - name: run cmd
+      #shell: cat /etc/passwd > /tmp/passwd
+      shell: tar zxvf /tmp/sample.tar.gz -C /tmp
+    - name: run parmission
+      file:
+        path: /tmp/sample.sh
+        state: file
+        owner: root
+        group: root
+        mode: "u=rwx,g=rwx,o=rwx"
+  #shell: "tar zxvf /tmp/sample.tar.gz"
+#  shell: cat /etc/passwd

@@ -1,0 +1,16 @@
+---
+- hosts: 172-31-18-81
+  sudo: yes
+  tasks:
+
+    # apache
+    #
+    - name: apache install
+      yum: name=httpd
+
+    - apache run
+      service: name=httpd state=started enabled=yes
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=restarted
+ 

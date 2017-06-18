@@ -1,0 +1,15 @@
+---
+- name: 変数の挙動確認
+  hosts: localhost
+  vars:
+    my_var: hoooooo
+    admin_user:
+      name: utsunomiya
+      uid: 10000
+  tasks:
+  - name: output my_var
+    debug:
+      msg: "my_var1 {{my_var}}"
+  - name: output my_var2
+    debug:
+      msg: "my_var2 {{admin_user.name}} , {{admin_user.uid}}"
